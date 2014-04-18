@@ -18,7 +18,11 @@
 %global build_java 1
 %endif
 %ifarch %{ix86} x86_64 ppc ppc64 ppc64p7 s390 s390x %{arm}
+%if 0%{?rhel} && 0%{?rhel} < 7
+%global build_go 0
+%else
 %global build_go 1
+%endif
 %else
 %global build_go 0
 %endif
