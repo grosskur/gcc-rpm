@@ -8,11 +8,15 @@
 %global _performance_build 1
 %global multilib_64_archs sparc64 ppc64 ppc64p7 s390x x86_64
 %ifarch %{ix86} x86_64 ia64 ppc ppc64 ppc64p7 alpha
+%if 0%{?rhel} && 0%{?rhel} < 7
+%global build_ada 0
+%else
 %global build_ada 1
+%endif
 %else
 %global build_ada 0
 %endif
-%if 0%{?rhel} >= 7
+%if 0%{?rhel}
 %global build_java 0
 %else
 %global build_java 1
