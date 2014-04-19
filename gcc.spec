@@ -375,9 +375,6 @@ This package contains static Fortran libraries.
 %package -n libgomp
 Summary: GCC OpenMP v3.0 shared support library
 Group: System Environment/Libraries
-%if 0%{?rhel} == 6
-Provides: libgomp = 4.4.7-4.el6
-%endif
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
