@@ -6,6 +6,7 @@
 %global gcc_release 11
 %global _unpackaged_files_terminate_build 0
 %global _performance_build 1
+%global _skip_check 1
 %global multilib_64_archs sparc64 ppc64 ppc64p7 s390x x86_64
 %ifarch %{ix86} x86_64 ia64 ppc ppc64 ppc64p7 alpha
 %if 0%{?rhel} && 0%{?rhel} < 7
@@ -374,6 +375,9 @@ This package contains static Fortran libraries.
 %package -n libgomp
 Summary: GCC OpenMP v3.0 shared support library
 Group: System Environment/Libraries
+%if 0%{?rhel} == 6
+Provides: libgomp = 4.4.7-4.el6
+%endif
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 
@@ -1874,6 +1878,7 @@ rm -f %{buildroot}%{mandir}/man3/ffi*
 echo gcc-%{version}-%{release}.%{_arch} > $FULLPATH/rpmver
 
 %check
+%if !0%{?_skip_check}
 cd obj-%{gcc_target_platform}
 
 %if %{build_java}
@@ -1900,6 +1905,7 @@ done
 tar cf - testlogs-%{_target_platform}-%{version}-%{release} | bzip2 -9c \
   | uuencode testlogs-%{_target_platform}.tar.bz2 || :
 rm -rf testlogs-%{_target_platform}-%{version}-%{release}
+%endif
 
 %clean
 rm -rf %{buildroot}
