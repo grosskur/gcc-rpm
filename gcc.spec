@@ -590,7 +590,9 @@ The Java(tm) runtime library sources for use in Eclipse.
 %package -n cpp
 Summary: The C Preprocessor
 Group: Development/Languages
+%if !0%{?rhel:1}
 Requires: filesystem >= 3
+%endif
 Provides: /lib/cpp
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
